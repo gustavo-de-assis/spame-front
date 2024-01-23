@@ -10,6 +10,11 @@ const delay = (amount = 750) =>
 
 export async function SignInRequest(data: SignInRequestData) {
   await delay();
+  const pass: string = "12345";
+
+  if (data.password != pass) {
+    return;
+  }
 
   return {
     token: uuid(),

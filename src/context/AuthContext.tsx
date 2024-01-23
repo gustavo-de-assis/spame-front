@@ -23,7 +23,9 @@ type AuthContextType = {
 
 export const AuthContext = createContext({} as AuthContextType);
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
+export function AuthProvider({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
 
@@ -40,17 +42,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   async function signInUser({ cpf, password }: SignInData) {
-    const { token, user } = await SignInRequest({
+    const response = await SignInRequest({
       cpf,
       password,
     });
 
-    setCookie(undefined, "sp.token", token, {
+    if (!response) {
+      console.log("invalid password");
+      return;
+    }
+
+    setCookie(undefined, "sp.token", response.token, {
       maxAge: 60 * 3, // 3 minutes
       sameSite: "none",
     });
 
-    setUser(user);
+    setUser(response.user);
     router.push("/dashboard");
   }
 

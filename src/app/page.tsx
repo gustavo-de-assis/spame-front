@@ -5,11 +5,20 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 
 export default function Home() {
-  const { register, handleSubmit } = useForm();
   const { signInUser } = useContext(AuthContext);
+  const { register, handleSubmit, formState, reset } = useForm({
+    defaultValues: {
+      cpf: "",
+      password: "",
+    },
+  });
 
-  async function handleSignIn(data) {
+  const { isSubmitting } = formState;
+
+  async function handleSignIn(data: any) {
     await signInUser(data);
+
+    reset();
   }
 
   const banner = require("../assets/banner.png");
@@ -32,7 +41,8 @@ export default function Home() {
               id="cpf"
               name="cpf"
               type="text"
-              autoComplete="current-cpf"
+              autoComplete="off"
+              autoFocus
               className="h-12 rounded bg-white px-3 outline-none focus:bg-slate-200"
               required
             />
@@ -51,10 +61,13 @@ export default function Home() {
           </div>
 
           <button
-            className="h-14 rounded-md bg-secondary text-white font-semibold text-3xl hover:bg-primary"
+            className={`h-14 rounded-md ${
+              isSubmitting ? "bg-primary" : "bg-secondary"
+            }   text-white font-semibold text-3xl hover:bg-primary`}
             type="submit"
+            disabled={isSubmitting}
           >
-            Entrar
+            {isSubmitting ? "Entrando..." : "Entrar"}
           </button>
         </form>
       </aside>
