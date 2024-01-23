@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { Mandali } from "next/font/google";
 import "./globals.css";
+import { AuthProvider } from "@/context/AuthContext";
 
-//const inter = Inter({ subsets: ["latin"] });
 const mandali = Mandali({ subsets: ["latin"], weight: ["400"] });
 
 export const metadata: Metadata = {
@@ -17,8 +16,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br">
-      <body className={mandali.className}>{children}</body>
+    <html lang="pt-br" className={mandali.className}>
+      <body>
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   );
 }
