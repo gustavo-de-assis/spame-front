@@ -16,8 +16,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br" className={mandali.className}>
-      <body>
+    <html lang="en">
+      <body className={mandali.className}>
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
