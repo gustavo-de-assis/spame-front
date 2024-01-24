@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useContext } from "react";
 
 export default function Navbar() {
-  const { user } = useContext(AuthContext);
+  const { user, signOutUser } = useContext(AuthContext);
 
   const logo = require("@/assets/logo_spame.png");
   const userLogo = require("@/assets/user.png");
@@ -18,7 +18,12 @@ export default function Navbar() {
       <aside className="flex flex-row items-center text-primary">
         <div className="flex flex-col text-right mr-2">
           <h1 className="text-xl">{user?.name}</h1>
-          <p className="text-sm">Sair</p>
+          <p
+            className="text-sm hover:cursor-pointer hover:text-white"
+            onClick={signOutUser}
+          >
+            Sair
+          </p>
         </div>
         <Image src={userLogo} width={80} alt="user" />
       </aside>

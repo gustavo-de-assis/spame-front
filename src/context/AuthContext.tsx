@@ -1,6 +1,6 @@
 "use client";
 import { createContext, useEffect, useState } from "react";
-import { setCookie, parseCookies } from "nookies";
+import { setCookie, parseCookies, destroyCookie } from "nookies";
 import { useRouter } from "next/navigation";
 
 import { SignInRequest, recoverUserInfo } from "@/services/auth";
@@ -61,8 +61,17 @@ export function AuthProvider({
     router.push("/dashboard");
   }
 
+  async function signOutUser() {
+    destroyCookie(undefined, "sp.token");
+    setUser(null);
+    alert("Logout!");
+    router.push("/");
+  }
+
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, signInUser }}>
+    <AuthContext.Provider
+      value={{ user, isAuthenticated, signInUser, signOutUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
