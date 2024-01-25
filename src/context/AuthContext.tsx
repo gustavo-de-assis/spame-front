@@ -19,6 +19,7 @@ type AuthContextType = {
   isAuthenticated: boolean;
   user: User;
   signInUser: (data: SignInData) => Promise<void>;
+  signOutUser: () => void;
 };
 
 export const AuthContext = createContext({} as AuthContextType);
