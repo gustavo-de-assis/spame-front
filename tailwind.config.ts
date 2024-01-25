@@ -13,6 +13,7 @@ const config: Config = {
         primary: "#004277",
         secondary: "#1B96EE",
         third: "#5FF0D5",
+        redButton: "#C31D1D"
       },
     },
   },
