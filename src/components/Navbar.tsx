@@ -10,7 +10,7 @@ export default function Navbar() {
   const userLogo = require("@/assets/user.png");
 
   return (
-    <nav className="w-screen h-28 bg-secondary flex flex-row justify-between px-6">
+    <nav className="w-full h-28 bg-secondary flex flex-row justify-between px-6 fixed top-0 left-0 z-10">
       <aside className="flex flex-row items-center">
         <Image src={logo} width={80} alt="logo" />
         <h1 className="text-primary text-2xl ml-4"> Clínica Médica</h1>
