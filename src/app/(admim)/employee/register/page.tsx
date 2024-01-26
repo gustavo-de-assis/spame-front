@@ -1,38 +1,81 @@
 "use client";
-import { useForm } from "react-hook-form";
 import Navbar from "@/components/Navbar";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+type Employee = {
+  name: string;
+  birthdate: string;
+  gender: string;
+  mother: string;
+  father: string;
+  cpf: string;
+  rg: string;
+  crm: string;
+  speciality: string;
+  phone: string;
+  email: string;
+};
+
+type Address = {
+  street: string;
+  number: string;
+  district: string;
+  city: string;
+  state: string;
+};
 
 export default function Register() {
-  const { register, handleSubmit, formState, reset } = useForm({
-    defaultValues: {
-      employee: {
-        name: "",
-        birthdate: "",
-        gender: "",
-        mother: "",
-        father: "",
-        cpf: "",
-        rg: "",
-        crm: "",
-        speciality: "",
-        phone: "",
-        email: "",
-      },
-      address: {
-        street: "",
-        number: "",
-        county: "",
-        city: "",
-        state: "",
-      },
-    },
+  const [cep, setCep] = useState<string>("");
+  const [address, setAddress] = useState<Address>({
+    street: "",
+    number: "",
+    district: "",
+    city: "",
+    state: "",
+  });
+  const [employee, setEmployee] = useState<Employee>({
+    name: "",
+    birthdate: "",
+    gender: "",
+    mother: "",
+    father: "",
+    cpf: "",
+    rg: "",
+    crm: "",
+    speciality: "",
+    phone: "",
+    email: "",
   });
 
-  const { isSubmitting } = formState;
+  useEffect(() => {
+    if (cep.length === 8) {
+      findAddressByCep();
+    }
+  }, [cep]);
 
-  async function handleRegistration(data: any) {
-    console.log(data);
-    reset();
+  async function findAddressByCep() {
+    const url = `https://viacep.com.br/ws/${cep}/json`;
+    let newAddress;
+    await axios
+      .get(url)
+      .then((res) => {
+        newAddress = res.data;
+        setAddress({
+          ...address,
+          street: newAddress.logradouro,
+          district: newAddress.bairro,
+          city: newAddress.localidade,
+          state: newAddress.uf,
+        });
+      })
+      .catch((e) => console.log(e));
+  }
+
+  function handleRegistration(e: any) {
+    e.preventDefault();
+    console.log("Employee: ", employee);
+    console.log("Address: ", address);
   }
 
   return (
@@ -41,19 +84,24 @@ export default function Register() {
       <section className="mt-32 px-8">
         <h1 className="text-primary text-4xl">Cadastramento de Funcionários</h1>
         <section className="mt-3">
-          <form onSubmit={handleSubmit(handleRegistration)}>
+          <form onSubmit={handleRegistration}>
             <section className="w-full">
               <h1 className="text-primary text-3xl">Informações Pessoais</h1>
               <div className="flex flex-row w-full gap-8 my-2">
                 <div className="flex flex-col w-2/5">
                   <label className="text-lg">Nome Completo</label>
                   <input
-                    {...register("employee.name")}
                     id="name"
                     name="name"
                     type="text"
                     autoComplete="off"
-                    autoFocus
+                    value={employee.name}
+                    onChange={(e) => {
+                      setEmployee({
+                        ...employee,
+                        name: e.target.value.toUpperCase(),
+                      });
+                    }}
                     className="h-11 rounded px-3 outline-none bg-slate-200 w-full"
                     required
                   />
@@ -61,12 +109,17 @@ export default function Register() {
                 <div className="flex flex-col w-26">
                   <label className="text-lg">Data Nasc.:</label>
                   <input
-                    {...register("employee.birthdate")}
                     id="birthdate"
                     name="birthdate"
                     type="date"
                     autoComplete="off"
-                    autoFocus
+                    value={employee.birthdate}
+                    onChange={(e) => {
+                      setEmployee({
+                        ...employee,
+                        birthdate: e.target.value.toUpperCase(),
+                      });
+                    }}
                     className="h-11 rounded px-3 outline-none bg-slate-200"
                     required
                   />
@@ -74,12 +127,17 @@ export default function Register() {
                 <div className="flex flex-col w-16">
                   <label className="text-lg">Sexo</label>
                   <input
-                    {...register("employee.gender")}
                     id="gender"
                     name="gender"
                     type="text"
                     autoComplete="off"
-                    autoFocus
+                    value={employee.gender}
+                    onChange={(e) => {
+                      setEmployee({
+                        ...employee,
+                        gender: e.target.value.toUpperCase(),
+                      });
+                    }}
                     className="h-11 rounded px-3 outline-none bg-slate-200"
                     required
                   />
@@ -89,12 +147,17 @@ export default function Register() {
                 <div className="flex flex-col w-2/5">
                   <label className="text-lg">Filiação (Mãe)</label>
                   <input
-                    {...register("employee.mother")}
                     id="mother"
                     name="mother"
                     type="text"
                     autoComplete="off"
-                    autoFocus
+                    value={employee.mother}
+                    onChange={(e) => {
+                      setEmployee({
+                        ...employee,
+                        mother: e.target.value.toUpperCase(),
+                      });
+                    }}
                     className="h-11 rounded px-3 outline-none bg-slate-200 w-full"
                     required
                   />
@@ -102,12 +165,17 @@ export default function Register() {
                 <div className="flex flex-col w-2/5">
                   <label className="text-lg">Filiação (Pai)</label>
                   <input
-                    {...register("employee.father")}
                     id="father"
                     name="father"
                     type="text"
                     autoComplete="off"
-                    autoFocus
+                    value={employee.father}
+                    onChange={(e) => {
+                      setEmployee({
+                        ...employee,
+                        father: e.target.value.toUpperCase(),
+                      });
+                    }}
                     className="h-11 rounded px-3 outline-none bg-slate-200 w-full"
                     required
                   />
@@ -118,12 +186,17 @@ export default function Register() {
                   <div className="flex flex-col w-26">
                     <label className="text-lg">CPF</label>
                     <input
-                      {...register("employee.cpf")}
                       id="cpf"
                       name="cpf"
                       type="text"
                       autoComplete="off"
-                      autoFocus
+                      value={employee.cpf}
+                      onChange={(e) => {
+                        setEmployee({
+                          ...employee,
+                          cpf: e.target.value.toUpperCase(),
+                        });
+                      }}
                       className="h-11 rounded px-3 outline-none bg-slate-200"
                       required
                     />
@@ -131,12 +204,17 @@ export default function Register() {
                   <div className="flex flex-col w-26">
                     <label className="text-lg">RG</label>
                     <input
-                      {...register("employee.rg")}
                       id="rg"
                       name="rg"
                       type="text"
                       autoComplete="off"
-                      autoFocus
+                      value={employee.rg}
+                      onChange={(e) => {
+                        setEmployee({
+                          ...employee,
+                          rg: e.target.value.toUpperCase(),
+                        });
+                      }}
                       className="h-11 rounded px-3 outline-none bg-slate-200"
                       required
                     />
@@ -146,12 +224,17 @@ export default function Register() {
                   <div className="flex flex-col w-26">
                     <label className="text-lg">CRM</label>
                     <input
-                      {...register("employee.crm")}
                       id="crm"
                       name="crm"
                       type="text"
                       autoComplete="off"
-                      autoFocus
+                      value={employee.crm}
+                      onChange={(e) => {
+                        setEmployee({
+                          ...employee,
+                          crm: e.target.value.toUpperCase(),
+                        });
+                      }}
                       className="h-11 rounded px-3 outline-none bg-slate-200"
                       required
                     />
@@ -159,12 +242,17 @@ export default function Register() {
                   <div className="flex flex-col w-26">
                     <label className="text-lg">Especialidade</label>
                     <input
-                      {...register("employee.speciality")}
                       id="speciality"
                       name="speciality"
                       type="text"
                       autoComplete="off"
-                      autoFocus
+                      value={employee.speciality}
+                      onChange={(e) => {
+                        setEmployee({
+                          ...employee,
+                          speciality: e.target.value.toUpperCase(),
+                        });
+                      }}
                       className="h-11 rounded px-3 outline-none bg-slate-200"
                       required
                     />
@@ -174,16 +262,35 @@ export default function Register() {
             </section>
             <section className="w-full">
               <h1 className="text-primary text-3xl">Endereço</h1>
+              <div className="flex flex-col w-1/4">
+                <label className="text-lg">Pesquisa Cep</label>
+                <input
+                  id="cep"
+                  name="cep"
+                  type="text"
+                  autoComplete="off"
+                  value={cep}
+                  onChange={(e) => {
+                    setCep(e.target.value);
+                  }}
+                  className="h-11 rounded px-3 outline-none bg-slate-200 w-full"
+                />
+              </div>
               <div className="flex flex-row w-full gap-8 my-2">
                 <div className="flex flex-col w-2/5">
                   <label className="text-lg">Rua</label>
                   <input
-                    {...register("address.street")}
                     id="street"
                     name="street"
                     type="text"
                     autoComplete="off"
-                    autoFocus
+                    value={address.street}
+                    onChange={(e) => {
+                      setAddress({
+                        ...address,
+                        street: e.target.value.toUpperCase(),
+                      });
+                    }}
                     className="h-11 rounded px-3 outline-none bg-slate-200 w-full"
                     required
                   />
@@ -191,12 +298,17 @@ export default function Register() {
                 <div className="flex flex-col w-26">
                   <label className="text-lg">Número</label>
                   <input
-                    {...register("address.number")}
                     id="number"
                     name="number"
                     type="text"
                     autoComplete="off"
-                    autoFocus
+                    value={address.number}
+                    onChange={(e) => {
+                      setAddress({
+                        ...address,
+                        number: e.target.value.toUpperCase(),
+                      });
+                    }}
                     className="h-11 rounded px-3 outline-none bg-slate-200"
                     required
                   />
@@ -206,12 +318,17 @@ export default function Register() {
                 <div className="flex flex-col w-1/4">
                   <label className="text-lg">Bairro</label>
                   <input
-                    {...register("address.county")}
-                    id="county"
-                    name="county"
+                    id="district"
+                    name="district"
                     type="text"
                     autoComplete="off"
-                    autoFocus
+                    value={address.district}
+                    onChange={(e) => {
+                      setAddress({
+                        ...address,
+                        district: e.target.value.toUpperCase(),
+                      });
+                    }}
                     className="h-11 rounded px-3 outline-none bg-slate-200 w-full"
                     required
                   />
@@ -219,12 +336,17 @@ export default function Register() {
                 <div className="flex flex-col w-1/5">
                   <label className="text-lg">Cidade</label>
                   <input
-                    {...register("address.city")}
                     id="city"
                     name="city"
                     type="text"
                     autoComplete="off"
-                    autoFocus
+                    value={address.city}
+                    onChange={(e) => {
+                      setAddress({
+                        ...address,
+                        city: e.target.value.toUpperCase(),
+                      });
+                    }}
                     className="h-11 rounded px-3 outline-none bg-slate-200 w-full"
                     required
                   />
@@ -232,12 +354,17 @@ export default function Register() {
                 <div className="flex flex-col w-16">
                   <label className="text-lg">UF</label>
                   <input
-                    {...register("address.state")}
                     id="state"
                     name="state"
                     type="text"
                     autoComplete="off"
-                    autoFocus
+                    value={address.state}
+                    onChange={(e) => {
+                      setAddress({
+                        ...address,
+                        state: e.target.value.toUpperCase(),
+                      });
+                    }}
                     className="h-11 rounded px-3 outline-none bg-slate-200"
                     required
                   />
@@ -250,12 +377,17 @@ export default function Register() {
                 <div className="flex flex-col w-1/5">
                   <label className="text-lg">Telefone</label>
                   <input
-                    {...register("employee.phone")}
                     id="phone"
                     name="phone"
                     type="text"
                     autoComplete="off"
-                    autoFocus
+                    value={employee.phone}
+                    onChange={(e) => {
+                      setEmployee({
+                        ...employee,
+                        phone: e.target.value.toUpperCase(),
+                      });
+                    }}
                     className="h-11 rounded px-3 outline-none bg-slate-200 w-full"
                     required
                   />
@@ -263,12 +395,17 @@ export default function Register() {
                 <div className="flex flex-col w-1/5">
                   <label className="text-lg">E-mail</label>
                   <input
-                    {...register("employee.email")}
                     id="email"
                     name="email"
                     type="text"
                     autoComplete="off"
-                    autoFocus
+                    value={employee.email}
+                    onChange={(e) => {
+                      setEmployee({
+                        ...employee,
+                        email: e.target.value.toUpperCase(),
+                      });
+                    }}
                     className="h-11 rounded px-3 outline-none bg-slate-200"
                     required
                   />
@@ -276,13 +413,11 @@ export default function Register() {
               </div>
             </section>
             <button
-              className={`h-14 w-52 rounded-md mt-8 ${
-                isSubmitting ? "bg-primary" : "bg-secondary"
-              }   text-white font-semibold text-3xl hover:bg-primary`}
+              className="h-14 w-52 rounded-md mt-8 
+                 bg-secondary text-3xl text-white"
               type="submit"
-              disabled={isSubmitting}
             >
-              {isSubmitting ? "Enviando..." : "Enviar"}
+              Enviar
             </button>
           </form>
         </section>
