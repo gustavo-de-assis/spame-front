@@ -3,27 +3,8 @@ import Navbar from "@/components/Navbar";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-type Employee = {
-  name: string;
-  birthdate: string;
-  gender: string;
-  mother: string;
-  father: string;
-  cpf: string;
-  rg: string;
-  crm: string;
-  speciality: string;
-  phone: string;
-  email: string;
-};
-
-type Address = {
-  street: string;
-  number: string;
-  district: string;
-  city: string;
-  state: string;
-};
+import { Employee } from "@/models/Employee";
+import { Address } from "@/models/Address";
 
 export default function Register() {
   const [cep, setCep] = useState<string>("");
