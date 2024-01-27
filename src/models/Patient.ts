@@ -1,4 +1,4 @@
-export type Employee = {
+export type Patient = {
   name: string;
   birthdate: string;
   gender: string;
@@ -6,8 +6,6 @@ export type Employee = {
   father: string;
   cpf: string;
   rg: string;
-  crm: string;
-  speciality: string;
   phone: string;
   email: string;
 };

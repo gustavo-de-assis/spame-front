@@ -3,10 +3,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 import { Address } from "@/models/Address";
-import { Employee } from "@/models/Employee";
+import { Doctor } from "@/models/Doctor";
+import { Patient } from "@/models/Patient";
 
 import AddressForm from "@/components/AddressForm";
 import Navbar from "@/components/Navbar";
+import PersonalInfoForm from "@/components/PersonalInfoForm";
 
 export default function Register() {
   const [cep, setCep] = useState<string>("");
@@ -17,7 +19,7 @@ export default function Register() {
     city: "",
     state: "",
   });
-  const [employee, setEmployee] = useState<Employee>({
+  const [employee, setEmployee] = useState<Patient>({
     name: "",
     birthdate: "",
     gender: "",
@@ -25,17 +27,24 @@ export default function Register() {
     father: "",
     cpf: "",
     rg: "",
-    crm: "",
-    speciality: "",
     phone: "",
     email: "",
   });
+  const [doctor, setDoctor] = useState<Doctor>({
+    crm: "",
+    speciality: "",
+  });
+
+  const [isDoctor, setIsDoctor] = useState<boolean>(false);
+  const isEmployee = true;
 
   useEffect(() => {
     if (cep.length === 8) {
       findAddressByCep();
     }
   }, [cep]);
+
+  useEffect(() => {}, [isDoctor]);
 
   async function findAddressByCep() {
     const url = `https://viacep.com.br/ws/${cep}/json`;
@@ -59,6 +68,7 @@ export default function Register() {
     e.preventDefault();
     console.log("Employee: ", employee);
     console.log("Address: ", address);
+    console.log("Doctor: ", doctor);
   }
 
   return (
@@ -68,181 +78,15 @@ export default function Register() {
         <h1 className="text-primary text-4xl">Cadastramento de Funcionários</h1>
         <section className="mt-3">
           <form onSubmit={handleRegistration}>
-            <section className="w-full">
-              <h1 className="text-primary text-3xl">Informações Pessoais</h1>
-              <div className="flex flex-row w-full gap-8 my-2">
-                <div className="flex flex-col w-2/5">
-                  <label className="text-lg">Nome Completo</label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    autoComplete="off"
-                    value={employee.name}
-                    onChange={(e) => {
-                      setEmployee({
-                        ...employee,
-                        name: e.target.value.toUpperCase(),
-                      });
-                    }}
-                    className="h-11 rounded px-3 outline-none bg-slate-200 w-full"
-                    required
-                  />
-                </div>
-                <div className="flex flex-col w-26">
-                  <label className="text-lg">Data Nasc.:</label>
-                  <input
-                    id="birthdate"
-                    name="birthdate"
-                    type="date"
-                    autoComplete="off"
-                    value={employee.birthdate}
-                    onChange={(e) => {
-                      setEmployee({
-                        ...employee,
-                        birthdate: e.target.value.toUpperCase(),
-                      });
-                    }}
-                    className="h-11 rounded px-3 outline-none bg-slate-200"
-                    required
-                  />
-                </div>
-                <div className="flex flex-col w-16">
-                  <label className="text-lg">Sexo</label>
-                  <input
-                    id="gender"
-                    name="gender"
-                    type="text"
-                    autoComplete="off"
-                    value={employee.gender}
-                    onChange={(e) => {
-                      setEmployee({
-                        ...employee,
-                        gender: e.target.value.toUpperCase(),
-                      });
-                    }}
-                    className="h-11 rounded px-3 outline-none bg-slate-200"
-                    required
-                  />
-                </div>
-              </div>
-              <div className="flex flex-row w-full gap-8 my-2">
-                <div className="flex flex-col w-2/5">
-                  <label className="text-lg">Filiação (Mãe)</label>
-                  <input
-                    id="mother"
-                    name="mother"
-                    type="text"
-                    autoComplete="off"
-                    value={employee.mother}
-                    onChange={(e) => {
-                      setEmployee({
-                        ...employee,
-                        mother: e.target.value.toUpperCase(),
-                      });
-                    }}
-                    className="h-11 rounded px-3 outline-none bg-slate-200 w-full"
-                    required
-                  />
-                </div>
-                <div className="flex flex-col w-2/5">
-                  <label className="text-lg">Filiação (Pai)</label>
-                  <input
-                    id="father"
-                    name="father"
-                    type="text"
-                    autoComplete="off"
-                    value={employee.father}
-                    onChange={(e) => {
-                      setEmployee({
-                        ...employee,
-                        father: e.target.value.toUpperCase(),
-                      });
-                    }}
-                    className="h-11 rounded px-3 outline-none bg-slate-200 w-full"
-                    required
-                  />
-                </div>
-              </div>
-              <div className="flex flex-row w-full gap-8 my-2">
-                <div className="flex flex-row gap-8 w-2/5">
-                  <div className="flex flex-col w-26">
-                    <label className="text-lg">CPF</label>
-                    <input
-                      id="cpf"
-                      name="cpf"
-                      type="text"
-                      autoComplete="off"
-                      value={employee.cpf}
-                      onChange={(e) => {
-                        setEmployee({
-                          ...employee,
-                          cpf: e.target.value.toUpperCase(),
-                        });
-                      }}
-                      className="h-11 rounded px-3 outline-none bg-slate-200"
-                      required
-                    />
-                  </div>
-                  <div className="flex flex-col w-26">
-                    <label className="text-lg">RG</label>
-                    <input
-                      id="rg"
-                      name="rg"
-                      type="text"
-                      autoComplete="off"
-                      value={employee.rg}
-                      onChange={(e) => {
-                        setEmployee({
-                          ...employee,
-                          rg: e.target.value.toUpperCase(),
-                        });
-                      }}
-                      className="h-11 rounded px-3 outline-none bg-slate-200"
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-row gap-8 w-1/2">
-                  <div className="flex flex-col w-26">
-                    <label className="text-lg">CRM</label>
-                    <input
-                      id="crm"
-                      name="crm"
-                      type="text"
-                      autoComplete="off"
-                      value={employee.crm}
-                      onChange={(e) => {
-                        setEmployee({
-                          ...employee,
-                          crm: e.target.value.toUpperCase(),
-                        });
-                      }}
-                      className="h-11 rounded px-3 outline-none bg-slate-200"
-                      required
-                    />
-                  </div>
-                  <div className="flex flex-col w-26">
-                    <label className="text-lg">Especialidade</label>
-                    <input
-                      id="speciality"
-                      name="speciality"
-                      type="text"
-                      autoComplete="off"
-                      value={employee.speciality}
-                      onChange={(e) => {
-                        setEmployee({
-                          ...employee,
-                          speciality: e.target.value.toUpperCase(),
-                        });
-                      }}
-                      className="h-11 rounded px-3 outline-none bg-slate-200"
-                      required
-                    />
-                  </div>
-                </div>
-              </div>
-            </section>
+            <PersonalInfoForm
+              person={employee}
+              doctor={doctor}
+              setPerson={setEmployee}
+              setDoctor={setDoctor}
+              isDoctor={isDoctor}
+              setIsDoctor={setIsDoctor}
+              isEmployee={isEmployee}
+            />
             <AddressForm
               cep={cep}
               address={address}
