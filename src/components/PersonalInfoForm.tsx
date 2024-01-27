@@ -1,18 +1,6 @@
 "use client";
-
-import { Doctor } from "@/models/Doctor";
-import { Patient } from "@/models/Patient";
-import { Dispatch, ReactNode, SetStateAction } from "react";
-
-type PersonalInfo = {
-  person: Patient;
-  doctor?: Doctor;
-  setPerson: Dispatch<SetStateAction<Patient>>;
-  setDoctor?: Dispatch<SetStateAction<Doctor>>;
-  setIsDoctor?: Dispatch<SetStateAction<boolean>>;
-  isDoctor?: boolean;
-  isEmployee: boolean;
-};
+import { PersonalInfo } from "@/models/PersonalInfo";
+import { ReactNode } from "react";
 
 export default function PersonalInfoForm(props: PersonalInfo): ReactNode {
   const {

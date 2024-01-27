@@ -1,14 +1,7 @@
 "use client";
 
-import { Address } from "@/models/Address";
-import { Dispatch, ReactNode, SetStateAction } from "react";
-
-type AddressProps = {
-  cep: string;
-  address: Address;
-  setCep: Dispatch<SetStateAction<string>>;
-  setAddress: Dispatch<SetStateAction<Address>>;
-};
+import { AddressProps } from "@/models/Address";
+import { ReactNode } from "react";
 
 export default function AddressForm(props: AddressProps): ReactNode {
   const { cep, address, setCep, setAddress } = props;
