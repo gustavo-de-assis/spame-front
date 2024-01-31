@@ -24,10 +24,15 @@ export default function SideBar(props: Props) {
       <aside className="h-full">
         <section className="h-1/3 w-full bg-primary rounded-xl rounded-b-none">
           {userInfo ? (
-            <div className="flex flex-col flex-nowrap overflow-hidden items-center h-full justify-between py-4">
-              <Image src={imgSrc} width={150} height={150} alt="imgSrc" className="rounded-full"/>
-              
-              <p className="text-2xl text-white text-center w-[90%]">
+            <div className="flex flex-col flex-nowrap overflow-hidden items-center gap-6 py-4">
+              <Image
+                src={imgSrc}
+                width={150}
+                height={150}
+                alt="imgSrc"
+                className="rounded-full"
+              />
+              <p className="text-2xl text-white text-center max-h-5">
                 {userInfo.name}
               </p>
             </div>
