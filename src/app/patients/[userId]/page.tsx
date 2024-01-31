@@ -51,9 +51,9 @@ export default function PatientPage({
     <main>
       <Navbar />
       <SideBar userInfo={userInfo} menuOpt={menuOpt} />
-      <aside className="flex flex-col w-[73%] ml-[490px] mt-36 rounded text-primary px-4">
+      <aside className="flex flex-col w-[73%] ml-[490px] mt-32 rounded text-primary px-4 bg-slate-200 py-5">
         <h1 className="text-5xl my-3">Dados Pessoais</h1>
-        <section className="bg-white rounded mt-4 mb-12">
+        <section className="mt-4 mb-12">
           <div className="text-2xl flex flex-col gap-2 px-6">
             <p>Nome: {user.name}</p>
             <p>Data Nasc.: {user.birthdate}</p>
@@ -64,7 +64,7 @@ export default function PatientPage({
           </div>
         </section>
         <h1 className="text-5xl my-3">Endereço e contato</h1>
-        <section className="bg-white rounded mt-4">
+        <section className="mt-4">
           <div className="text-2xl flex flex-col gap-2 px-6">
             <p>Rua: {address.street}</p>
             <p>Número: {address.number}</p>
