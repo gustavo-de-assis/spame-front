@@ -25,7 +25,13 @@ export default function SideBar(props: Props) {
         <section className="h-1/4 w-full bg-primary rounded-xl rounded-b-none">
           {userInfo ? (
             <div className="flex flex-col flex-nowrap overflow-hidden items-center gap-6 py-4">
-              <Image src={imgSrc} width={150} height={150} alt="imgSrc" />
+              <Image
+                src={imgSrc}
+                width={150}
+                height={150}
+                alt="imgSrc"
+                className="rounded-full"
+              />
               <p className="text-2xl text-white text-center max-h-5">
                 {userInfo.name}
               </p>

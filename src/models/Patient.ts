@@ -1,4 +1,5 @@
 export type Patient = {
+  id: number;
   name: string;
   mother: string;
   father: string;
@@ -8,4 +9,5 @@ export type Patient = {
   rg: string;
   phone: string;
   email: string;
+  addressId: number;
 };

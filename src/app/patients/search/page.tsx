@@ -50,8 +50,10 @@ export default function Search() {
 
       {search.length > 0 ? (
         <section className="mx-8">
-          {patients.map((p, idx) => (
-            <PatientInfo patient={p} key={idx} />
+          {patients.map((p) => (
+            <div key={p.id}>
+              <PatientInfo patient={p} />
+            </div>
           ))}
         </section>
       ) : (
