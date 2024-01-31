@@ -1,7 +1,11 @@
+"use client";
 import ItemList from "@/components/ItemList";
 import Navbar from "@/components/Navbar";
+import { useRouter } from "next/navigation";
 
 export default function EmployeeList () {
+    const router = useRouter();
+
     const employeesMed = [{
             Nome: "Esdrinhas Alisson Antero Fontes",
             Especialidade: "Cirurgião",
@@ -40,8 +44,13 @@ export default function EmployeeList () {
         <>
             <Navbar/>
 
-            <section className="flex flex-col items-center gap-10 h-auto">
-                <h1 className="font-normal text-primary text-[50px] leading-[45px] mt-14 w-[95%]"> Funcionários </h1>
+            <section className="flex flex-col items-center gap-10 h-auto mt-[112px]">
+                <div className="flex items-center justify-between mt-[50px] w-[95%]">
+                    <h1 className="font-normal text-primary text-[50px] leading-[45px]"> Funcionários </h1>
+                    <button 
+                        className="h-[40px] w-[120px] rounded-[10px] text-white font-bold bg-secondary" 
+                        onClick={() => router.push("/employee/register")}>Adicionar</button>  
+                </div>
                 
                 <div className="flex flex-col gap-[30px] w-[95%]">
                     <h2 className="font-normal text-primary text-[36px]">{roles[0].role}</h2>
