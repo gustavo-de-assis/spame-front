@@ -4,6 +4,7 @@ import SideBar from "@/components/SideBar";
 import { Patient } from "@/models/Patient";
 import { getAddressById } from "@/services/addresses";
 import { getUserById } from "@/services/patients";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function PatientPage({
@@ -12,9 +13,8 @@ export default function PatientPage({
   params: { userId: string };
 }) {
   const [user, setUser] = useState<Patient>();
-  //const [address, setAddress] = useState<Address>();
-  /*   const user = await getUserById(Number(params.userId));
-   */
+  const router = useRouter();
+
   useEffect(() => {
     const getUser = getUserById(Number(params.userId));
     setUser(getUser);
@@ -28,7 +28,20 @@ export default function PatientPage({
     imgSrc: img,
   };
 
-  const menuOpt = [{ name: "OLA" }, { name: "OLA" }, { name: "OLA" }];
+  const menuOpt = [
+    {
+      name: "Dados Pessoais",
+      handler: () => router.push(`/patients/${params.userId}`),
+    },
+    {
+      name: "Atendimentos",
+      handler: () => router.push(`/patients/${params.userId}/appointments`),
+    },
+    {
+      name: "Agendar Atendimento",
+      handler: () => router.push(`/patients/${params.userId}/schedule`),
+    },
+  ];
 
   if (!user) {
     return <>Carregando...</>;

@@ -8,6 +8,7 @@ type User = {
 
 type Menu = {
   name: string;
+  handler: () => void;
 };
 
 type Props = {
@@ -42,7 +43,7 @@ export default function SideBar(props: Props) {
         </section>
         <section className="h-3/5 w-full bg-third rounded-xl rounded-t-none">
           {menuOpt.map((item, idx) => (
-            <MenuItem name={item.name} key={idx} />
+            <MenuItem name={item.name} handler={item.handler} key={idx} />
           ))}
         </section>
       </aside>

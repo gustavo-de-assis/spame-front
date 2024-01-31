@@ -5,7 +5,6 @@ export default function PatientInfo({ patient }: Patient) {
   const router = useRouter();
 
   const navigateToPatientPage = () => {
-    console.log("Patient:", patient);
     router.push(`/patients/${patient.id}`);
   };
 
