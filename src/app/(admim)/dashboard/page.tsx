@@ -13,7 +13,7 @@ export default function Dashboard() {
       <Navbar></Navbar>
       <section className="w-screen h-screen flex flex-row items-center justify-center">
         <div className=" w-3/4 h-full items-center justify-evenly flex flex-row">
-          <MenuButton Icon={FiSearch} route="/search">
+          <MenuButton Icon={FiSearch} route="/patients/search">
             Pacientes
           </MenuButton>
           <MenuButton Icon={FaIdCard} route="/employee-list">

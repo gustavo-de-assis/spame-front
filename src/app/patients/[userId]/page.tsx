@@ -50,32 +50,38 @@ export default function PatientPage({
   return (
     <main>
       <Navbar />
-      <SideBar userInfo={userInfo} menuOpt={menuOpt} />
-      <aside className="flex flex-col w-[73%] ml-[490px] mt-32 rounded text-primary px-4 bg-slate-200 py-5">
-        <h1 className="text-5xl my-3">Dados Pessoais</h1>
-        <section className="mt-4 mb-12">
-          <div className="text-2xl flex flex-col gap-2 px-6">
-            <p>Nome: {user.name}</p>
-            <p>Data Nasc.: {user.birthdate}</p>
-            <p>Mãe: {user.mother}</p>
-            <p>Pai: {user.father}</p>
-            <p>Cpf: {user.cpf}</p>
-            <p>Rg: {user.rg}</p>
-          </div>
-        </section>
-        <h1 className="text-5xl my-3">Endereço e contato</h1>
-        <section className="mt-4">
-          <div className="text-2xl flex flex-col gap-2 px-6">
-            <p>Rua: {address.street}</p>
-            <p>Número: {address.number}</p>
-            <p>Bairro: {address.district}</p>
-            <p>Cidade: {address.city}</p>
-            <p>Estado: {address.state}</p>
-            <p>Telefone: {user.phone}</p>
-            <p>Email: {user.email}</p>
-          </div>
-        </section>
-      </aside>
+
+      <div className="flex items-start gap-8 mt-[152px]">
+        <SideBar userInfo={userInfo} menuOpt={menuOpt} />
+        
+        <aside className="flex flex-col w-[73%] rounded text-primary px-4 bg-slate-200">
+          <h1 className="text-5xl my-3">Dados Pessoais</h1>
+
+          <section className="mt-2 mb-6">
+            <div className="text-2xl flex flex-col gap-2 px-6">
+              <p>Nome: {user.name}</p>
+              <p>Data Nasc.: {user.birthdate}</p>
+              <p>Mãe: {user.mother}</p>
+              <p>Pai: {user.father}</p>
+              <p>Cpf: {user.cpf}</p>
+              <p>Rg: {user.rg}</p>
+            </div>
+          </section>
+
+          <h1 className="text-5xl my-3">Endereço e contato</h1>
+          <section className="mt-2">
+            <div className="text-2xl flex flex-col gap-2 px-6">
+              <p>Rua: {address.street}</p>
+              <p>Número: {address.number}</p>
+              <p>Bairro: {address.district}</p>
+              <p>Cidade: {address.city}</p>
+              <p>Estado: {address.state}</p>
+              <p>Telefone: {user.phone}</p>
+              <p>Email: {user.email}</p>
+            </div>
+          </section>
+        </aside>
+      </div>
     </main>
   );
 }
