@@ -3,7 +3,7 @@ import QueueItem from "./QueueItem";
 
 export default function PatientQeue() {
   const patientsQueue = getDoctorQueue(5);
-
+  patientsQueue.sort((a, b) => (a.appointTime > b.appointTime ? 1 : -1));
   return (
     <main>
       <section className="flex flex-row justify-between text-2xl text-primary">

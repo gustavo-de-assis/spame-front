@@ -6,7 +6,7 @@ export default function DocLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="h-fit w-screen">
+    <main className="h-fit w-full">
       <Navbar />
       <section className="mt-36 px-8">{children}</section>
     </main>
