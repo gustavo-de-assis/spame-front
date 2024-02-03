@@ -1,8 +1,6 @@
 import { getDoctorById } from "@/services/doctor";
 
 type mdRecordType = {
-  id: number;
-  patientId: number;
   doctorId: number;
   diagnostic: string;
   createdAt: string;
@@ -20,7 +18,7 @@ export default function MedicalRecord(props: mdRecordType) {
         <h2>Médico: {doctorInfo.name}</h2>
         <h2>Especialidade: {doctorInfo.speciality}</h2>
       </section>
-      <section>{diagnostic}</section>
+      <section className="text-justify">{diagnostic.toUpperCase()}</section>
     </main>
   );
 }

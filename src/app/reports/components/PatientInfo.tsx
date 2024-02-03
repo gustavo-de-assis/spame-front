@@ -1,6 +1,13 @@
 import { Patient } from "@/models/Patient";
 
-export default function PatientInfo(props: Patient) {
+type PatientHeader = {
+  name: string;
+  birthdate: string;
+  gender: string;
+  cpf: string;
+};
+
+export default function PatientInfo(props: PatientHeader) {
   const { name, birthdate, gender, cpf } = props;
 
   return (
