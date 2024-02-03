@@ -41,9 +41,8 @@ export default function MdRecord({
           <section>
             <h1 className="text-3xl mb-5">Atendimentos</h1>
             {mdRecord.map((m) => (
-              <div className="mb-16">
+              <div className="mb-16" key={m.id}>
                 <MedicalRecord
-                  key={m.id}
                   diagnostic={m.diagnostic}
                   createdAt={m.createdAt}
                   doctorId={m.doctorId}
