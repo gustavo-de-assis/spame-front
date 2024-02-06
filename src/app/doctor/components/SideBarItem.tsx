@@ -2,7 +2,7 @@ import Stopwatch from "./Chronometer";
 
 type Item = {
   name: string;
-  handler: () => void;
+  handler?: () => void;
   itemIdx: number;
   stopAppointment: boolean;
 };
@@ -19,6 +19,5 @@ export default function SideBarItemList(props: Item) {
       <span>{name.toUpperCase()}</span>
       <Stopwatch stopAppointment={stopAppointment} />
     </div>
-  )
+  );
 }
-

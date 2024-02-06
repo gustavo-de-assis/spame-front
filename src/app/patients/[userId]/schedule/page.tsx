@@ -1,3 +1,4 @@
+"use client";
 import Navbar from "@/components/Navbar";
 import SelectOptions from "@/components/SelectOptions";
 import SideBar from "@/components/SideBar";
