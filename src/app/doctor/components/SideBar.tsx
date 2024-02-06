@@ -29,12 +29,12 @@ export default function SideBar(props: Props) {
   const [finishAppointment, setFinishAppointment] = useState(false);
 
   return (
-    <main className="h-[80vh] w-[440px] ml-8">
+    <main className="h-[80vh] w-1/3 ml-8">
         <aside className="h-full">
             {
               userInfo?.name 
               ? 
-              <section className="h-1/3 w-full bg-primary rounded-xl rounded-b-none flex flex-col flex-nowrap overflow-hidden items-center justify-center gap-3">
+              <section className="h-1/3 min-w- w-full bg-primary rounded-xl rounded-b-none flex flex-col flex-nowrap overflow-hidden items-center justify-center gap-3">
                 <Image loader={imageLoader} src="Patient.png" width={150} height={150} alt="Patient picture" className="h-[150px] w-[150px] rounded-full"/>
 
                 <p className="text-2xl text-white text-center max-h-5"> {userInfo.name} </p>

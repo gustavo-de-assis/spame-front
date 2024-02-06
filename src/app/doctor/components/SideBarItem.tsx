@@ -15,7 +15,7 @@ export default function SideBarItemList(props: Item) {
     ?
     <span className="flex items-center cursor-pointer h-10 w-full text-2xl p-5 text-primary hover:bg-primary hover:text-third" onClick={() => { handler(); }}>{name.toUpperCase()}</span>
     :
-    <div className="flex items-center cursor-pointer justify-between h-10 w-full p-5 text-2xl text-primary hover:bg-primary hover:text-third" onClick={() => handler()}>
+    <div className="flex items-center cursor-pointer justify-between h-10 w-full p-5 text-2xl bg-primary text-third hover:bg-primary hover:text-third" onClick={() => handler()}>
       <span>{name.toUpperCase()}</span>
       <Stopwatch stopAppointment={stopAppointment} />
     </div>
