@@ -1,5 +1,6 @@
 "use client";
 import { getUserById } from "@/services/patients";
+import { useRouter } from "next/navigation";
 
 type QueueItemType = {
   patientId: number;
@@ -9,11 +10,13 @@ type QueueItemType = {
 
 export default function QueueItem(props: QueueItemType) {
   const { patientId, returning, appointTime } = props;
+  const route = useRouter();
 
   const patient = getUserById(patientId);
 
   const startAppointment = () => {
-    console.log("Patient: ", patient);
+    //console.log("Patient: ", patient);
+    route.push(`/doctor/appointment/${patientId}`);
   };
 
   return (
