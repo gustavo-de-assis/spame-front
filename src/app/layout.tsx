@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Mandali } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
+import { PatientProvider } from "@/context/PatientContext";
 
 const mandali = Mandali({ subsets: ["latin"], weight: ["400"] });
 
@@ -18,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={mandali.className}>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <PatientProvider>{children}</PatientProvider>
+        </AuthProvider>
       </body>
     </html>
   );
