@@ -4,8 +4,12 @@ import SelectOptions from "@/components/SelectOptions";
 import SideBar from "@/components/SideBar";
 import { useRouter } from "next/navigation";
 
-export default function Appointment({ params, } : { params: { userId: string }; }) {
-  const router = useRouter();
+export default function Appointment({
+  params,
+}: {
+  params: { userId: string };
+}) {
+  /* const router = useRouter();
   const image = require("@/assets/perfilSpame.jpg");
   const user = { name: "Esdrinhas", imgSrc: image };
   const menuOpt = [
@@ -21,7 +25,7 @@ export default function Appointment({ params, } : { params: { userId: string }; 
       name: "Agendar Atendimento",
       handler: () => router.push(`/patients/${params.userId}/schedule`),
     },
-  ];
+  ]; */
   const optionsArray = ["Cirurgião", "Psicólogo", "Pediatra"];
   const dataOptions = ["23/03/2032", "23/03/2032", "23/03/2032"];
 
@@ -29,9 +33,9 @@ export default function Appointment({ params, } : { params: { userId: string }; 
     <>
       <Navbar />
 
-      <section className="flex items-center gap-8 mt-[152px]">
-        <SideBar userInfo={user} menuOpt={menuOpt} />
-
+      <section>
+        {/* <SideBar userInfo={user} menuOpt={menuOpt} />
+         */}
         <div className="h-[80vh] w-[50vw] flex flex-col">
           <h1 className="font-normal text-primary text-[45px] leading-[45px]">
             Novo Agendamento

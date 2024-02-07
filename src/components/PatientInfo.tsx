@@ -1,10 +1,14 @@
+import { PatientContext } from "@/context/PatientContext";
 import { Patient } from "@/models/Patient";
 import { useRouter } from "next/navigation";
+import { useContext } from "react";
 
 export default function PatientInfo({ patient }: Patient) {
   const router = useRouter();
+  const { getPatient } = useContext(PatientContext);
 
   const navigateToPatientPage = () => {
+    getPatient(patient.id);
     router.push(`/patients/${patient.id}`);
   };
 
