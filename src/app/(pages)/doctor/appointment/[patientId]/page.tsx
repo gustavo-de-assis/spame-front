@@ -24,7 +24,7 @@ export default function DocAppointment({
     },
     {
       name: "Prontuário",
-      handler: () => window.open(`/records/mdRecords/${params.patientId}`),
+      handler: () => window.open(`/reports/mdRecord/${params.patientId}`),
     },
     {
       name: "Agendar Retorno",
