@@ -208,4 +208,3 @@ export default function PersonalInfoForm(props: PersonalInfo): ReactNode {
     </main>
   );
 }
-

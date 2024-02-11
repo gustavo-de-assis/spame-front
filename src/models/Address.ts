@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 
 export type Address = {
-  id: number;
   street: string;
   number: string;
   district: string;
