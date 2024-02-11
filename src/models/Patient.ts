@@ -8,4 +8,6 @@ export type Patient = {
   rg: string;
   phone: string;
   email: string;
+  image: string;
+  addressId: number;
 };
