@@ -7,7 +7,8 @@ export default function DocLayout({
 }>) {
   return (
     <main className="h-fit w-full">
-      <Navbar />
+      {/*       <Navbar />
+       */}{" "}
       <section className="mt-36 px-8">{children}</section>
     </main>
   );

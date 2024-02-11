@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import SideBarItemList from "./SideBarItem";
-import AnonymousImage from "../../../assets/user.png";
+import AnonymousImage from "@/assets/user.png";
 import { useState } from "react";
 
 type User = {
