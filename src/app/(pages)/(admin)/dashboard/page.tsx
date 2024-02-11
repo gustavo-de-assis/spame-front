@@ -16,10 +16,10 @@ export default function Dashboard() {
           <MenuButton Icon={FiSearch} route="/search">
             Pacientes
           </MenuButton>
-          <MenuButton Icon={FaIdCard} route="/employee-list">
+          <MenuButton Icon={FaIdCard} route="/employee/list">
             Funcionários
           </MenuButton>
-          <MenuButton Icon={LuCalendarClock} route="/employee-scale">
+          <MenuButton Icon={LuCalendarClock} route="/employee/scale">
             Escalas
           </MenuButton>
           <MenuButton Icon={VscGraph} route="/reports">
