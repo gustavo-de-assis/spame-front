@@ -1,5 +1,4 @@
 "use client";
-import Navbar from "@/components/Navbar";
 import { PatientContext } from "@/context/PatientContext";
 import { Address } from "@/models/Address";
 import { getAddressById } from "@/services/addresses";
@@ -30,7 +29,7 @@ export default function PatientPage({
 
   return (
     <main className="w-full">
-      <Navbar />
+      {/* <Navbar /> */}
       <aside className="flex w-[97%] h-[80vh] flex-col rounded text-primary px-4 bg-slate-200">
         <h1 className="text-5xl my-3">Dados Pessoais</h1>
 

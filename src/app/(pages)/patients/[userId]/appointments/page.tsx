@@ -1,6 +1,5 @@
 "use client";
 
-import Navbar from "@/components/Navbar";
 import ScheduleList from "@/components/ScheduleList";
 import { getScheduleByUserId } from "@/services/schedule";
 
@@ -13,8 +12,6 @@ export default function Appointments({
 
   return (
     <main className="w-full">
-      <Navbar />
-
       <section>
         <div className="h-[80vh] w-[70vw] flex flex-col">
           <h1 className="font-normal text-primary text-[45px] leading-[45px] mb-14">

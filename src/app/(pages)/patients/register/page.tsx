@@ -64,7 +64,6 @@ export default function Register() {
 
   return (
     <main>
-      <Navbar />
       <section className="mt-32 px-8">
         <h1 className="text-primary text-4xl">Cadastramento de Pacientes</h1>
         <section className="mt-3">
